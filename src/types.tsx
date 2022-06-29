@@ -56,11 +56,10 @@ export interface DiaryStep {
 export interface Item {
     id: string;
     name: string;
-    points: number;
     tier: number;
-    quests?: string;
+    baseTime: number;
+    timeRange: number;
     image?: string;
-    items?: string[];
     notes?: string;
     weight?: number;
 }
@@ -111,7 +110,7 @@ export interface Pet {
     weight?: number;
 }
 
-export interface WheelTask {
-    task: Task,
-    color: string;
+export interface Mission {
+    item: Item;
+    time: number;
 }

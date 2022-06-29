@@ -5,25 +5,28 @@ import Button from './Button/Button';
 import Glitch from './Glitch/Glitch';
 import { Items } from './items';
 import RollScreen from './RollScreen/RollScreen';
-import { Item } from './types';
+import { Item, Mission } from './types';
+import { aAnNone, timeConvert } from './helpers';
 
 function App() {
-  const [currentMission, setCurrentMission] = useState<Item | null>(null);
+  const [currentMission, setCurrentMission] = useState<Mission | null>(null);
   const [currentRandoms, setCurrentRandoms] = useState<string[] | null>(null);
   const [playAnimation, setPlayAnimation] = useState(false);
 
-  const animationLength = 10000;
+  const animationLength = 15000;
 
   const generateMission = () => {
     const items = Items.filter(i => i.tier === 1);
 
     const roll = Math.floor(Math.random()*items.length);
     const selection = items[roll];
-    const randoms = items.slice(Math.max(roll-10, 0), roll+1);
+    const randomItems = [...items].sort(() => 0.5 - Math.random());
+    const randoms = randomItems.slice(0, 10).concat(selection);
 
-    console.log('selected:', selection.name)
-
-    setCurrentMission(selection);
+    const timeRange = Math.floor(Math.random()*selection.timeRange);
+    const timeMod = Math.random() < 0.5 ? timeRange * -1 : timeRange;
+    
+    setCurrentMission({ item: selection, time: selection.baseTime + timeMod });
     setCurrentRandoms(randoms.map(i => i.name));
     setPlayAnimation(true);
     setTimeout(() => setPlayAnimation(false), animationLength)
@@ -38,12 +41,17 @@ function App() {
 
       {!playAnimation && 
         <>
-          <div className="mission">
-            <h3 className="mission__label">Current Mission</h3>
-            <div>{currentMission?.name || `N\\A`}</div>
-          </div> 
+          { currentMission && 
+            <div className="mission">
+              <h3 className="mission__label">Current Mission</h3>
+              <div>Obtain {aAnNone(currentMission.item.name)} <span className="mission__item">{currentMission?.item.name || `N\\A`}</span> in <span className="mission__time">{timeConvert(currentMission?.time)}</span> or less.</div>
+            </div> 
+          }
 
-          <Button label="Next Mission" onClick={generateMission}></Button>
+          <div className="mission__options">
+            <Button label="Complete Mission" onClick={generateMission} borderColor="#4d4"></Button>
+            <Button label="Fail Mission" onClick={generateMission} borderColor="red"></Button>
+          </div>
         </>
       }
     </div>

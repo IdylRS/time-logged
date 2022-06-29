@@ -2,12 +2,45 @@
     width: 100%;
     height: 100%;
     background: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.container h2 {
+    margin: 10px;
+    font-size: 48px;
+    font-weight: normal;
+}
+
+.nextMission {
+    grid-column: 1 / span 2;
+}
+
+.timeContainer {
+    text-align: center;
+    opacity: 0;
+    animation: fade-in 1s linear 7s forwards;
+}
+
+.time {
+    opacity: 0;
+    animation: fade-in 1s linear 9s forwards;
+    color: red;
+    font-size: 64px;
 }
 
 .wheel {
+    opacity: 0;
     font-size: 64px;
     margin-bottom: 20px;
     text-align: center;
+    animation: fade-in 1s linear 2.5s forwards;
+}
+
+.wheel__title {
+    margin: 10px;
+    font-size: 64px;
+    font-weight: normal;
 }
 
 .wheelAnim {
@@ -18,8 +51,7 @@
 }
 
 .wheelAnimText {
-    opacity: 0;
-    animation: fade-in 1s linear 2.5s forwards, mission 5s ease-out 1s forwards;
+    animation: mission 5s ease-out 1s forwards, glow .75s ease-in 6s;
 }
 
 @keyframes mission {
@@ -42,3 +74,16 @@
     }
 }
 
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 0px white;
+    }
+
+    70% {
+        text-shadow: 0 0 20px white;
+    }
+
+    100% {
+        text-shadow: 0 0 0px white;
+    }
+}

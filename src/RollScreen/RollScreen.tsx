@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import './RollScreen.css';
 
 import Glitch from '../Glitch/Glitch';
-import { Item } from "../types";
+import { Item, Mission } from "../types";
+import { timeConvert } from "../helpers";
 
 interface Props {
-    selection: Item | null;
+    selection: Mission | null;
     randoms: string[] | null;
 }
 
@@ -14,12 +15,20 @@ const RollScreen = ({ selection, randoms }: Props) => {
 
     return (
         <div className="container">
-            <Glitch label="Your next mission is..."></Glitch>
+            <div className="nextMission">
+                <Glitch label="Your next mission is"></Glitch>
+            </div>
 
             <div className="wheel">
+                <h2 className="wheel__title">Obtain</h2>
                 <div className="wheelAnim">
                     <div className="wheelAnimText">{randoms?.map(item => <>{item}<br /></>)}</div>
                 </div>
+            </div>
+
+            <div className="timeContainer">
+                <h2>You have</h2>
+                <div className="time">{selection && timeConvert(selection?.time)}</div>
             </div>
         </div>
     )

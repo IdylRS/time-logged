@@ -22,12 +22,16 @@
   margin-top:0;
 }
 
-@keyframes mission {
-  0% {
-    transform: translateY(0px);
-  }
+.mission__item {
+  color: rgb(0, 180, 0);
+}
 
-  100% {
-    transform: translateY(calc(-100% + 70px));
-  }
+.mission__time {
+  color: red;
+}
+
+.mission__options {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
 }
