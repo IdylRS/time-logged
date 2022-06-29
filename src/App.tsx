@@ -7,6 +7,7 @@ import { Items } from './items';
 import RollScreen from './RollScreen/RollScreen';
 import { Item, Mission } from './types';
 import { aAnNone, timeConvert } from './helpers';
+import ItemPanel from './ItemPanel/ItemPanel';
 
 function App() {
   const [currentMission, setCurrentMission] = useState<Mission | null>(null);
@@ -54,6 +55,8 @@ function App() {
           </div>
         </>
       }
+
+      <ItemPanel></ItemPanel>
     </div>
   );
 }

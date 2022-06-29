@@ -1,0 +1,52 @@
+.addItem {
+
+    &__button {
+        display: flex;
+        align-items: center;
+        border: none;
+        background: none;
+        color: white;
+        font-size: 20px;
+        height: 32px;
+        margin: 5px 0px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &__icon {
+        width: 32px;
+        height: 32px;
+        margin: 5px;
+        filter: invert(1);
+    }
+
+    &__form {
+        display: grid;
+        max-width: 500px;
+        grid-template-columns: 1fr 3fr;
+        row-gap: 5px;
+        margin: 10px 0px;
+        color: black;
+
+        label {
+            color: white;
+        }
+
+        &-number {
+            width: 50px;
+        }
+
+        &-picker {
+            width: 224px;
+        }
+
+        &-close {
+            width: 80px;
+            justify-self: end;
+            background: rgb(154, 0, 0);
+            color: white;
+        }
+    }
+}
