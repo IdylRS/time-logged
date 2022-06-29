@@ -1,27 +1,25 @@
 .App {
-  text-align: center;
   color: white;
   display: grid;
-  justify-content: center;
+  justify-items: center;
+  min-width: 1000px;
+}
+
+.title {
+  font-size: 94px;
+  margin: 10px;
 }
 
 .mission {
   font-size: 48px;
   margin-bottom: 20px;
-  width: 500px;
-}
-
-.missionAnim {
-  overflow: hidden;
-  height: 70px;
-}
-
-.missionAnim.animated .missionAnimText {
-  animation: mission 4s forwards;
+  max-width: 500px;
+  text-align: center;
 }
 
 .mission__label {
   margin-bottom: 5px;
+  margin-top:0;
 }
 
 @keyframes mission {

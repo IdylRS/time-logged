@@ -1,6 +1,7 @@
 body {
   background: black;
   margin: 0;
+  overflow-x: hidden;
   font-family: 'Teko', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
