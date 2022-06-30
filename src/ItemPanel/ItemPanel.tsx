@@ -5,12 +5,12 @@ import { Items } from '../items';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Table from '../Table/Table';
-import { Item, Task } from '../types';
+import { CompletedMission, Item, Mission, Task } from '../types';
 
 interface Props {
   onMarkedComplete?: Function;
-  completed?: Task[];
-  currentOptions?: Task[];
+  completed?: CompletedMission[];
+  currentMission ?: Mission;
   readOnly?: boolean;
 }
 
@@ -40,10 +40,10 @@ function ItemPanel(props: Props) {
                       idIndex="id"
                       data={Items}
                       tier={num}
-                      completedIds={props.completed ? _.pluck(props.completed, 'referenceId') : []}
+                      completed={props.completed ? props.completed : []}
                       onMarkedComplete={(task: any) => props.onMarkedComplete ? props.onMarkedComplete(task) : null}
                       defaultSort={{ index: 'name', asc: true }}
-                      currentOptions={props.currentOptions}
+                      currentMission={props.currentMission}
                     ></Table>
                 </TabPanel>
             )

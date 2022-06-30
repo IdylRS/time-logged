@@ -114,3 +114,8 @@ export interface Mission {
     item: Item;
     time: number;
 }
+
+export interface CompletedMission {
+    mission: Mission,
+    success: boolean
+}

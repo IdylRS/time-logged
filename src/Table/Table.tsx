@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Task } from '../types';
+import { CompletedMission, Mission, Task } from '../types';
 import _ from 'underscore';
 import './Table.scss';
 
@@ -12,16 +12,30 @@ interface Props {
     tier?: number;
     onMarkedComplete?: Function;
     idIndex: string;
-    completedIds: string[];
+    completed: CompletedMission[];
     colSizes?: string[];
     defaultSort?: { index: string, asc: boolean };
-    currentOptions?: Task[];
+    currentMission?: Mission;
 }
 
 function Table(props: Props) {
     const [data, setData] = useState<any>(props.data);
     const [hideCompleted, setHideCompleted] = useState(false);
     const [currentSort, setCurrentSort] = useState(props.defaultSort)
+    const [completedIds, setCompletedIds] = useState<string[]>([]);
+    const [failedIds, setFailedIds] = useState<string[]>([]);
+
+    useEffect(() => {
+        let completedItems = _.pluck(props.completed.filter(m => m.success), 'item');
+        let completedIds = _.pluck(completedItems, 'id');
+
+        let failedItems = _.pluck(props.completed.filter(m => !m.success), 'item');
+        let failedIds = _.pluck(failedItems, 'id');
+
+
+        setCompletedIds(completedIds);
+        setFailedIds(failedIds)
+    }, []);
 
     const handleChecked = (el: any) => {
         if (props.onMarkedComplete) props.onMarkedComplete(el);
@@ -100,7 +114,7 @@ function Table(props: Props) {
             </div>
             <span>Total entries: {
                 data.filter((el: any) =>
-                    (el.tier === props.tier || props.tier === 0) && (hideCompleted ? !props.completedIds.includes(el[props.idIndex]) : true))
+                    (el.tier === props.tier || props.tier === 0) && (hideCompleted ? !completedIds.includes(el[props.idIndex]) : true))
                     .length
             }</span>
             <table className="table">
@@ -123,12 +137,12 @@ function Table(props: Props) {
                 <tbody>
                     {
                         data
-                            .filter((el: any) => (el.tier === props.tier || props.tier === 0) && (hideCompleted ? !props.completedIds.includes(el[props.idIndex]) : true))
+                            .filter((el: any) => (el.tier === props.tier || props.tier === 0) && (hideCompleted ? !completedIds.includes(el[props.idIndex]) : true))
                             .map((el: any) =>
                                 <tr
                                     key={el[props.idIndex]}
                                     className={
-                                        `table__row ${props.readOnly ? 'read-only ' : ''}${props.currentOptions && _.pluck(props.currentOptions, 'referenceId').includes(el[props.idIndex]) ? 'progress' : ''} ${props.completedIds.includes(el[props.idIndex]) ? `complete` : ``}`
+                                        `table__row ${props.readOnly ? 'read-only ' : ''}${props.currentMission && props.currentMission.item.id === el[props.idIndex] ? 'progress' : ''} ${completedIds.includes(el[props.idIndex]) ? `complete` : ``} ${failedIds.includes(el[props.idIndex]) ? `failed` : ``}`
                                     }
                                     onClick={() => !props.readOnly ? handleChecked(el) : ''}
                                 >
@@ -157,7 +171,7 @@ function Table(props: Props) {
                                             type="checkbox"
                                             disabled={props.readOnly}
                                             onChange={() => handleChecked(el)}
-                                            checked={props.completedIds.includes(el[props.idIndex])}
+                                            checked={completedIds.includes(el[props.idIndex])}
                                         />
                                     </td>
                                 </tr>
