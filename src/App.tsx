@@ -17,7 +17,8 @@ function App() {
   const animationLength = 15000;
 
   const generateMission = () => {
-    const items = Items.filter(i => i.tier === 1);
+    const completedIds = completedMissions.map(i => i.mission.item.id);
+    const items = Items.filter(i => i.tier === 1 && !completedIds.includes(i.id));
 
     const roll = Math.floor(Math.random() * items.length);
     const selection = items[roll];
