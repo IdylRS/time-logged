@@ -8,7 +8,8 @@ export function timeConvert(n: number) {
 }
 
 export function aAnNone(word: string) {
-    if(word.endsWith('s')) return '';
+    const strippedWord = word.replace(/\(*\)/, '');
+    if(strippedWord.endsWith('s')) return '';
 
     if(['a,e,i,o,h'].includes(word[0])) return 'an';
 

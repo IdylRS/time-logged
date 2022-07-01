@@ -30,6 +30,10 @@ const RollScreen = ({ selection, randoms }: Props) => {
                 <h2>You have</h2>
                 <div className="time">{selection && timeConvert(selection?.time)}</div>
             </div>
+
+            <div className="timeStarts">
+                Your time starts when you meet the requirements to begin.
+            </div>
         </div>
     )
 }

@@ -29,6 +29,14 @@
     font-size: 64px;
 }
 
+.timeStarts {
+    opacity: 0;
+    animation: fade-in 1s linear 11s forwards;
+    grid-column: 1 / span 2;
+    font-size: 48px;
+    text-align: center;
+}
+
 .wheel {
     opacity: 0;
     font-size: 64px;
