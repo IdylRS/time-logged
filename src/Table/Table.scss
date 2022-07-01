@@ -44,11 +44,11 @@
     }
 
     &.complete {
-      background-color: #00B81C;
+      background-color: #039c1a;
     }
 
     &.failed {
-      background-color: red;
+      background-color: rgb(209, 0, 0);
     }
 
     &:hover {

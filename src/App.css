@@ -2,7 +2,8 @@
   color: white;
   display: grid;
   justify-items: center;
-  min-width: 1000px;
+  max-width: 1000px;
+  font-size: 24px;
 }
 
 .title {
@@ -23,7 +24,7 @@
 }
 
 .mission__item {
-  color: rgb(0, 180, 0);
+  color: rgb(255, 225, 0);
 }
 
 .mission__time {

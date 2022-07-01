@@ -62,7 +62,7 @@ function App() {
 
             <div className="mission__options">
               <Button label="Complete Mission" onClick={() => markMissionComplete(true)} borderColor="#4d4"></Button>
-              <Button label="Fail Mission" onClick={() => markMissionComplete(true)} borderColor="red"></Button>
+              <Button label="Fail Mission" onClick={() => markMissionComplete(false)} borderColor="red"></Button>
             </div>
           </>
           }
@@ -71,7 +71,7 @@ function App() {
           <br />
           <br />
           {currentMission && <ItemPanel currentMission={currentMission} completed={completedMissions}></ItemPanel>}
-          {!currentMission && <ItemPanel></ItemPanel>}
+          {!currentMission && <ItemPanel completed={completedMissions}></ItemPanel>}
         </>
       }
     </div>

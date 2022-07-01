@@ -26,11 +26,8 @@ function Table(props: Props) {
     const [failedIds, setFailedIds] = useState<string[]>([]);
 
     useEffect(() => {
-        let completedItems = _.pluck(props.completed.filter(m => m.success), 'item');
-        let completedIds = _.pluck(completedItems, 'id');
-
-        let failedItems = _.pluck(props.completed.filter(m => !m.success), 'item');
-        let failedIds = _.pluck(failedItems, 'id');
+        let completedIds = props.completed.filter(c => c.success).map(c => c.mission.item.id);
+        let failedIds = props.completed.filter(c => !c.success).map(c => c.mission.item.id);
 
 
         setCompletedIds(completedIds);
@@ -79,19 +76,6 @@ function Table(props: Props) {
 
         setData(newData);
     }
-
-    // useEffect(() => {
-    //     let newData = [...props.data];
-
-    //     if (currentSort?.asc === true) {
-    //         newData = newData.sort((a, b) => a[currentSort.index] > b[currentSort.index] ? 1 : -1);
-    //     }
-    //     else if(currentSort) {
-    //         newData = newData.sort((a, b) => a[currentSort.index] < b[currentSort.index] ? 1 : -1);
-    //     }
-
-    //     setData(newData);
-    // }, [currentSort, props.data]);
 
     return (
         <>
